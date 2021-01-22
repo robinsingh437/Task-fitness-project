@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="fitnessProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cartId" />
+          </Key>
+          <Property Name="cartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime2" Precision="7" />
+          <Property Name="totalPrice" Type="money" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="gearId" Type="int" />
+          <Property Name="sportsWearId" Type="int" />
+          <Property Name="userId" Type="varchar" MaxLength="50" />
+          <Property Name="orderId" Type="int" />
+        </EntityType>
+        <EntityType Name="gear">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="itemDescription" Type="varchar" MaxLength="1000" />
+          <Property Name="price" Type="money" />
+          <Property Name="imageUrl" Type="varchar" MaxLength="200" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="orderId" />
+          </Key>
+          <Property Name="orderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shippingAddress" Type="varchar" MaxLength="100" />
+          <Property Name="paymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="orderDate" Type="datetime2" Precision="7" />
+          <Property Name="amount" Type="money" />
+          <Property Name="userId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sportswear">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="1" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="size" Type="char" MaxLength="5" />
+          <Property Name="itemDescription" Type="varchar" MaxLength="1000" />
+          <Property Name="price" Type="money" />
+          <Property Name="imageUrl" Type="varchar" MaxLength="200" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pass" Type="varchar" MaxLength="50" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="gender" Type="char" MaxLength="1" />
+          <Property Name="emailId" Type="varchar" MaxLength="50" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="city" Type="varchar" MaxLength="50" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="createdAt" Type="datetime2" Precision="7" />
+          <Property Name="role" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="cart_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="cart_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="totalPrice" Type="money" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+          <Parameter Name="gearId" Type="int" Mode="In" />
+          <Parameter Name="sportsWearId" Type="int" Mode="In" />
+          <Parameter Name="userId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="display_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="insert_gear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="type" Type="varchar" Mode="In" />
+          <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="imageUrl" Type="varchar" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="insert_sportswear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="gender" Type="char" Mode="In" />
+          <Parameter Name="type" Type="varchar" Mode="In" />
+          <Parameter Name="size" Type="char" Mode="In" />
+          <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="imageUrl" Type="varchar" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="items_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="size" Type="char" Mode="In" />
+          <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="men_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="order_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="shippingAddress" Type="varchar" Mode="In" />
+          <Parameter Name="paymentMethod" Type="varchar" Mode="In" />
+          <Parameter Name="amount" Type="money" Mode="In" />
+          <Parameter Name="userId" Type="varchar" Mode="In" />
+          <Parameter Name="oid" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="profile_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="update_gear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="itemId" Type="int" Mode="In" />
+          <Parameter Name="type" Type="varchar" Mode="In" />
+          <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="imageUrl" Type="varchar" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="update_sportswear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="itemId" Type="int" Mode="In" />
+          <Parameter Name="gender" Type="char" Mode="In" />
+          <Parameter Name="size" Type="char" Mode="In" />
+          <Parameter Name="type" Type="varchar" Mode="In" />
+          <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="imageUrl" Type="varchar" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="user_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+          <Parameter Name="firstName" Type="varchar" Mode="In" />
+          <Parameter Name="lastName" Type="varchar" Mode="In" />
+          <Parameter Name="gender" Type="char" Mode="In" />
+          <Parameter Name="emailId" Type="varchar" Mode="In" />
+          <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="address" Type="varchar" Mode="In" />
+          <Parameter Name="city" Type="varchar" Mode="In" />
+          <Parameter Name="country" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="user_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user_id" Type="varchar" Mode="In" />
+          <Parameter Name="user_password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="women_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="fitnessProjectModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gear" EntityType="Self.gear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sportswear" EntityType="Self.sportswear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="fitnessProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="emailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="createdAt" Type="DateTime" Precision="7" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="fitnessProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <FunctionImport Name="cart_insert">
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="itemId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="items_insert">
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="size" Mode="In" Type="String" />
+            <Parameter Name="itemDescription" Mode="In" Type="String" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="order_insert">
+            <Parameter Name="orderId" Mode="In" Type="Int32" />
+            <Parameter Name="shippingAddress" Mode="In" Type="String" />
+            <Parameter Name="paymentMethod" Mode="In" Type="String" />
+            <Parameter Name="amount" Mode="In" Type="Decimal" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="user_insert">
+            <Parameter Name="userId" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="emailId" Mode="In" Type="String" />
+            <Parameter Name="phoneNumber" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+            <Parameter Name="country" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="user_login" ReturnType="Collection(fitnessProjectModel.user_login_Result)">
+            <Parameter Name="user_id" Mode="In" Type="String" />
+            <Parameter Name="user_password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="display_items" ReturnType="Collection(fitnessProjectModel.display_items_Result)" />
+          <FunctionImport Name="insert_gear">
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="itemDescription" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="imageUrl" Mode="In" Type="String" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="insert_sportswear">
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="size" Mode="In" Type="String" />
+            <Parameter Name="itemDescription" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="imageUrl" Mode="In" Type="String" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="sportswears" EntityType="fitnessProjectModel.sportswear" />
+          <FunctionImport Name="update_gear">
+            <Parameter Name="itemId" Mode="In" Type="Int32" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="itemDescription" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="imageUrl" Mode="In" Type="String" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="update_sportswear">
+            <Parameter Name="itemId" Mode="In" Type="Int32" />
+            <Parameter Name="gender" Mode="In" Type="String" />
+            <Parameter Name="size" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="itemDescription" Mode="In" Type="String" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="imageUrl" Mode="In" Type="String" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="men_display" ReturnType="Collection(fitnessProjectModel.men_display_Result)" />
+          <FunctionImport Name="women_display" ReturnType="Collection(fitnessProjectModel.women_display_Result)" />
+          <FunctionImport Name="cart_insert1">
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="totalPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="gearId" Mode="In" Type="Int32" />
+            <Parameter Name="sportsWearId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="gears" EntityType="fitnessProjectModel.gear" />
+          <EntitySet Name="Carts" EntityType="fitnessProjectModel.Cart" />
+          <FunctionImport Name="cart_insert2">
+            <Parameter Name="totalPrice" Mode="In" Type="Decimal" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+            <Parameter Name="gearId" Mode="In" Type="Int32" />
+            <Parameter Name="sportsWearId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="cart_display" ReturnType="Collection(fitnessProjectModel.cart_display_Result)">
+          <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Orders" EntityType="fitnessProjectModel.Order" />
+          <FunctionImport Name="order_insert1">
+            <Parameter Name="shippingAddress" Mode="In" Type="String" />
+            <Parameter Name="paymentMethod" Mode="In" Type="String" />
+            <Parameter Name="amount" Mode="In" Type="Decimal" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+            <Parameter Name="oid" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="order_insert2">
+            <Parameter Name="shippingAddress" Mode="In" Type="String" />
+            <Parameter Name="paymentMethod" Mode="In" Type="String" />
+            <Parameter Name="amount" Mode="In" Type="Decimal" />
+            <Parameter Name="userId" Mode="In" Type="String" />
+            <Parameter Name="oid" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="profile_display" ReturnType="Collection(fitnessProjectModel.profile_display_Result)">
+            <Parameter Name="userId" Mode="In" Type="String" />
+          </FunctionImport>
+          </EntityContainer>
+        <ComplexType Name="user_login_Result">
+          <Property Type="String" Name="userId" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pass" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="firstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="emailId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="country" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="createdAt" Nullable="true" />
+          <Property Type="String" Name="role" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="display_items_Result">
+          <Property Type="Int32" Name="itemId" Nullable="false" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="itemDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="sportswear">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="size" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="itemDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="imageUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="men_display_Result">
+          <Property Type="Int32" Name="itemId" Nullable="false" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="itemDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="String" Name="imageUrl" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="women_display_Result">
+          <Property Type="Int32" Name="itemId" Nullable="false" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="itemDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="Decimal" Name="price" Nullable="true" Precision="19" />
+          <Property Type="String" Name="imageUrl" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="gear">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="type" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="itemDescription" MaxLength="1000" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="price" Precision="19" Scale="4" Type="Decimal" />
+          <Property Name="imageUrl" MaxLength="200" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="quantity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cartId" />
+          </Key>
+          <Property Name="cartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="7" />
+          <Property Name="totalPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="gearId" Type="Int32" />
+          <Property Name="sportsWearId" Type="Int32" />
+          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="orderId" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="cart_display_Result">
+          <Property Type="Int32" Name="cartId" Nullable="false" />
+          <Property Type="Int32" Name="gearId" Nullable="true" />
+          <Property Type="Int32" Name="sportsWearId" Nullable="true" />
+          <Property Type="Decimal" Name="totalPrice" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="itemDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="imageUrl" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="date" Nullable="true" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="orderId" />
+          </Key>
+          <Property Name="orderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shippingAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="paymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="orderDate" Type="DateTime" Precision="7" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="userId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="profile_display_Result">
+          <Property Type="Int32" Name="orderId" Nullable="false" />
+          <Property Type="Decimal" Name="amount" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="cartId" Nullable="false" />
+          <Property Type="Int32" Name="gearId" Nullable="true" />
+          <Property Type="Int32" Name="sportsWearId" Nullable="true" />
+          <Property Type="Decimal" Name="totalPrice" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="itemDescription" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="imageUrl" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="orderDate" Nullable="true" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="gender" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="fitnessProjectModelStoreContainer" CdmEntityContainer="fitnessProjectEntities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="fitnessProjectModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="items_insert" FunctionName="fitnessProjectModel.Store.items_insert" />
+          <FunctionImportMapping FunctionImportName="user_insert" FunctionName="fitnessProjectModel.Store.user_insert" />
+          <FunctionImportMapping FunctionImportName="user_login" FunctionName="fitnessProjectModel.Store.user_login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="fitnessProjectModel.user_login_Result">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="display_items" FunctionName="fitnessProjectModel.Store.display_items">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="fitnessProjectModel.display_items_Result">
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="insert_gear" FunctionName="fitnessProjectModel.Store.insert_gear" />
+          <FunctionImportMapping FunctionImportName="insert_sportswear" FunctionName="fitnessProjectModel.Store.insert_sportswear" />
+          <EntitySetMapping Name="sportswears">
+            <EntityTypeMapping TypeName="fitnessProjectModel.sportswear">
+              <MappingFragment StoreEntitySet="sportswear">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="update_gear" FunctionName="fitnessProjectModel.Store.update_gear" />
+          <FunctionImportMapping FunctionImportName="update_sportswear" FunctionName="fitnessProjectModel.Store.update_sportswear" />
+          <FunctionImportMapping FunctionImportName="men_display" FunctionName="fitnessProjectModel.Store.men_display">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="fitnessProjectModel.men_display_Result">
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="women_display" FunctionName="fitnessProjectModel.Store.women_display">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="fitnessProjectModel.women_display_Result">
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="gears">
+            <EntityTypeMapping TypeName="fitnessProjectModel.gear">
+              <MappingFragment StoreEntitySet="gear">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="fitnessProjectModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="sportsWearId" ColumnName="sportsWearId" />
+                <ScalarProperty Name="gearId" ColumnName="gearId" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="cartId" ColumnName="cartId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="cart_insert2" FunctionName="fitnessProjectModel.Store.cart_insert" />
+          <FunctionImportMapping FunctionImportName="cart_display" FunctionName="fitnessProjectModel.Store.cart_display">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="fitnessProjectModel.cart_display_Result">
+                <ScalarProperty Name="cartId" ColumnName="cartId" />
+                <ScalarProperty Name="gearId" ColumnName="gearId" />
+                <ScalarProperty Name="sportsWearId" ColumnName="sportsWearId" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="fitnessProjectModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="paymentMethod" ColumnName="paymentMethod" />
+                <ScalarProperty Name="shippingAddress" ColumnName="shippingAddress" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="order_insert2" FunctionName="fitnessProjectModel.Store.order_insert" />
+          <FunctionImportMapping FunctionImportName="profile_display" FunctionName="fitnessProjectModel.Store.profile_display">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="fitnessProjectModel.profile_display_Result">
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="cartId" ColumnName="cartId" />
+                <ScalarProperty Name="gearId" ColumnName="gearId" />
+                <ScalarProperty Name="sportsWearId" ColumnName="sportsWearId" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

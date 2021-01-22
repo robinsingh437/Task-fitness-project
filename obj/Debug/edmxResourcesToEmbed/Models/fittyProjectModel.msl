@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="fitnessProjectModelStoreContainer" CdmEntityContainer="fitnessProjectEntities">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="fitnessProjectModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="items_insert" FunctionName="fitnessProjectModel.Store.items_insert" />
+    <FunctionImportMapping FunctionImportName="user_insert" FunctionName="fitnessProjectModel.Store.user_insert" />
+    <FunctionImportMapping FunctionImportName="user_login" FunctionName="fitnessProjectModel.Store.user_login">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fitnessProjectModel.user_login_Result">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="emailId" ColumnName="emailId" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="display_items" FunctionName="fitnessProjectModel.Store.display_items">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fitnessProjectModel.display_items_Result">
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="insert_gear" FunctionName="fitnessProjectModel.Store.insert_gear" />
+    <FunctionImportMapping FunctionImportName="insert_sportswear" FunctionName="fitnessProjectModel.Store.insert_sportswear" />
+    <EntitySetMapping Name="sportswears">
+      <EntityTypeMapping TypeName="fitnessProjectModel.sportswear">
+        <MappingFragment StoreEntitySet="sportswear">
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="update_gear" FunctionName="fitnessProjectModel.Store.update_gear" />
+    <FunctionImportMapping FunctionImportName="update_sportswear" FunctionName="fitnessProjectModel.Store.update_sportswear" />
+    <FunctionImportMapping FunctionImportName="men_display" FunctionName="fitnessProjectModel.Store.men_display">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fitnessProjectModel.men_display_Result">
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="women_display" FunctionName="fitnessProjectModel.Store.women_display">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fitnessProjectModel.women_display_Result">
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="gears">
+      <EntityTypeMapping TypeName="fitnessProjectModel.gear">
+        <MappingFragment StoreEntitySet="gear">
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="fitnessProjectModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="sportsWearId" ColumnName="sportsWearId" />
+          <ScalarProperty Name="gearId" ColumnName="gearId" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="cartId" ColumnName="cartId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="cart_insert2" FunctionName="fitnessProjectModel.Store.cart_insert" />
+    <FunctionImportMapping FunctionImportName="cart_display" FunctionName="fitnessProjectModel.Store.cart_display">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fitnessProjectModel.cart_display_Result">
+          <ScalarProperty Name="cartId" ColumnName="cartId" />
+          <ScalarProperty Name="gearId" ColumnName="gearId" />
+          <ScalarProperty Name="sportsWearId" ColumnName="sportsWearId" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="fitnessProjectModel.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+          <ScalarProperty Name="paymentMethod" ColumnName="paymentMethod" />
+          <ScalarProperty Name="shippingAddress" ColumnName="shippingAddress" />
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="order_insert2" FunctionName="fitnessProjectModel.Store.order_insert" />
+    <FunctionImportMapping FunctionImportName="profile_display" FunctionName="fitnessProjectModel.Store.profile_display">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="fitnessProjectModel.profile_display_Result">
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="cartId" ColumnName="cartId" />
+          <ScalarProperty Name="gearId" ColumnName="gearId" />
+          <ScalarProperty Name="sportsWearId" ColumnName="sportsWearId" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

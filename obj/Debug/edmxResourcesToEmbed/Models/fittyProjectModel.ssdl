@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="fitnessProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cartId" />
+    </Key>
+    <Property Name="cartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="datetime2" Precision="7" />
+    <Property Name="totalPrice" Type="money" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="gearId" Type="int" />
+    <Property Name="sportsWearId" Type="int" />
+    <Property Name="userId" Type="varchar" MaxLength="50" />
+    <Property Name="orderId" Type="int" />
+  </EntityType>
+  <EntityType Name="gear">
+    <Key>
+      <PropertyRef Name="itemId" />
+    </Key>
+    <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+    <Property Name="itemDescription" Type="varchar" MaxLength="1000" />
+    <Property Name="price" Type="money" />
+    <Property Name="imageUrl" Type="varchar" MaxLength="200" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="orderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shippingAddress" Type="varchar" MaxLength="100" />
+    <Property Name="paymentMethod" Type="varchar" MaxLength="50" />
+    <Property Name="orderDate" Type="datetime2" Precision="7" />
+    <Property Name="amount" Type="money" />
+    <Property Name="userId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sportswear">
+    <Key>
+      <PropertyRef Name="itemId" />
+    </Key>
+    <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gender" Type="char" MaxLength="1" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+    <Property Name="size" Type="char" MaxLength="5" />
+    <Property Name="itemDescription" Type="varchar" MaxLength="1000" />
+    <Property Name="price" Type="money" />
+    <Property Name="imageUrl" Type="varchar" MaxLength="200" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pass" Type="varchar" MaxLength="50" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" />
+    <Property Name="gender" Type="char" MaxLength="1" />
+    <Property Name="emailId" Type="varchar" MaxLength="50" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="50" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="country" Type="varchar" MaxLength="50" />
+    <Property Name="createdAt" Type="datetime2" Precision="7" />
+    <Property Name="role" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Function Name="cart_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="cart_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="totalPrice" Type="money" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+    <Parameter Name="gearId" Type="int" Mode="In" />
+    <Parameter Name="sportsWearId" Type="int" Mode="In" />
+    <Parameter Name="userId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="display_items" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="insert_gear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="money" Mode="In" />
+    <Parameter Name="imageUrl" Type="varchar" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="insert_sportswear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="gender" Type="char" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="size" Type="char" Mode="In" />
+    <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="money" Mode="In" />
+    <Parameter Name="imageUrl" Type="varchar" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="items_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="price" Type="money" Mode="In" />
+    <Parameter Name="size" Type="char" Mode="In" />
+    <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="men_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="order_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="shippingAddress" Type="varchar" Mode="In" />
+    <Parameter Name="paymentMethod" Type="varchar" Mode="In" />
+    <Parameter Name="amount" Type="money" Mode="In" />
+    <Parameter Name="userId" Type="varchar" Mode="In" />
+    <Parameter Name="oid" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="profile_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="update_gear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="itemId" Type="int" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="money" Mode="In" />
+    <Parameter Name="imageUrl" Type="varchar" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="update_sportswear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="itemId" Type="int" Mode="In" />
+    <Parameter Name="gender" Type="char" Mode="In" />
+    <Parameter Name="size" Type="char" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="itemDescription" Type="varchar" Mode="In" />
+    <Parameter Name="price" Type="money" Mode="In" />
+    <Parameter Name="imageUrl" Type="varchar" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="user_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
+    <Parameter Name="firstName" Type="varchar" Mode="In" />
+    <Parameter Name="lastName" Type="varchar" Mode="In" />
+    <Parameter Name="gender" Type="char" Mode="In" />
+    <Parameter Name="emailId" Type="varchar" Mode="In" />
+    <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="city" Type="varchar" Mode="In" />
+    <Parameter Name="country" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="user_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="user_id" Type="varchar" Mode="In" />
+    <Parameter Name="user_password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="women_display" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="fitnessProjectModelStoreContainer">
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="gear" EntityType="Self.gear" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sportswear" EntityType="Self.sportswear" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
